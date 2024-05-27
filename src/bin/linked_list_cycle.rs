@@ -21,5 +21,5 @@ fn main() {
 
 
 fn detect_linked_list_cycle<T>(list: LinkedList<T>) -> bool {
-    todo()!
+    unimplemented!()
 }
