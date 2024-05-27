@@ -13,3 +13,7 @@ path = "src/main.rs"
 
 [[bin]]
 name = "linked_list_cycle"
+
+[[bin]]
+name = "remove_adj_dups_str"
+path = "src/bin/remove_adj_dups_str.rs"
