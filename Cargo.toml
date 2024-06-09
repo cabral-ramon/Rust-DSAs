@@ -17,3 +17,9 @@ name = "linked_list_cycle"
 [[bin]]
 name = "remove_adj_dups_str"
 path = "src/bin/remove_adj_dups_str.rs"
+
+[[bin]]
+name = "basic_calculator"
+
+[[bin]]
+name = "palindrome_permutation"
