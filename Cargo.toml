@@ -23,3 +23,6 @@ name = "basic_calculator"
 
 [[bin]]
 name = "palindrome_permutation"
+
+[[bin]]
+name = "valid_anagram"
