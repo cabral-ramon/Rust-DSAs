@@ -26,3 +26,6 @@ name = "palindrome_permutation"
 
 [[bin]]
 name = "valid_anagram"
+
+[[bin]]
+name = "binary_search"
