@@ -29,3 +29,6 @@ name = "valid_anagram"
 
 [[bin]]
 name = "binary_search"
+
+[[bin]]
+name = "rotated_sorted_array"
