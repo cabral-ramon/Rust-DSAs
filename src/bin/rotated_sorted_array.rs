@@ -33,12 +33,12 @@ fn rotated_sorted_array(arr: &[u32], target: u32) -> Option<usize> {
                 continue;
             }
         } else if target >= arr[mid] && target <= arr[high] {
-                low = mid + 1;
-                continue;
-            } else {
-                high = mid - 1;
-                continue;
-            }
+            low = mid + 1;
+            continue;
+        } else {
+            high = mid - 1;
+            continue;
+        }
     }
     None
 }

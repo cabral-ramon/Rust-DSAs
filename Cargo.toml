@@ -32,3 +32,9 @@ name = "binary_search"
 
 [[bin]]
 name = "rotated_sorted_array"
+
+[[bin]]
+name = "reverse_linked_list"
+
+[[bin]]
+name = "vec_linked_list"
