@@ -34,7 +34,7 @@ name = "binary_search"
 name = "rotated_sorted_array"
 
 [[bin]]
-name = "reverse_linked_list"
-
-[[bin]]
 name = "vec_linked_list"
+
+# [[bin]]
+# name = "number_of_islands"
