@@ -52,7 +52,6 @@ impl<T: std::fmt::Debug> LinkedList<T> {
     }
 
     pub fn peek(&self) -> Option<NodePtr<T>> {
-        // self.head.as_ref().map(|ptr| ptr.clone())
         self.head.as_ref().cloned()
     }
 }
