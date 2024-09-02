@@ -94,7 +94,7 @@ impl LinkedList {
         vec
     }
 
-    fn reverse_nodes(&mut self, group_size: usize) {
+    fn reverse_nodes(&mut self) {
         // Reverse linked list algo for reference
         // TODO: see if there is a way to call into this helper
         let mut prev: Link = None;
@@ -110,8 +110,11 @@ impl LinkedList {
     }
 
     fn reverse_nodes_in_k_group(&mut self, group_size: usize) {
+        if group_size <= 1 {
+            return;
+        }
         // placeholder node makes keeping track of head and reversing the first group easier
-        let mut dummy = Node::new(0);
+        let dummy = Node::new(0);
         dummy.borrow_mut().next = self.head.clone();
 
         // keep track of the nodes that come before and after the Kth group
@@ -123,11 +126,9 @@ impl LinkedList {
         // We'll need to update ...before to point to 3
         // And 2 to point to ...after
         let mut group_prev = Some(dummy.clone());
-        let mut group_next = None;
 
         // iterate through the list
         'outer: while let Some(group_node_prev) = group_prev {
-
             // find the Kth node
             let mut kth = Some(group_node_prev.clone());
             for _ in 0..group_size {
@@ -139,29 +140,34 @@ impl LinkedList {
                 }
             }
 
-            // the next node for the group is the node after Kth
-            // Kth is guaranteed to not be None at this point
-            group_next = kth.clone().unwrap().borrow_mut().next.clone();
-
-            // reverse the group -- from group_prev.next up to group_next
+            // reverse the group -- from group_prev.next up to K
             let mut curr = group_node_prev.borrow_mut().next.clone();
-            curr.clone().unwrap().borrow_mut().next = group_next.clone();
             let mut prev: Link = None;
 
-            while curr.is_some() && !Rc::ptr_eq(&curr.clone().unwrap(), &group_next.clone().unwrap()) {
-                let node = curr.unwrap();
-                let next: Link = node.borrow_mut().next.clone();
-                node.borrow_mut().next = prev.clone(); 
-                prev = Some(node.clone());
-                curr = next;
+            for _ in 0..group_size {
+                if let Some(node) = curr {
+                    let next: Link = node.borrow_mut().next.clone();
+                    node.borrow_mut().next = prev.clone();
+                    prev = Some(node.clone());
+                    curr = next;
+                }
             }
+            // curr now points to the first node in the next group
+            // prev now points to the last node in the current group
 
+            // store a reference to the first node in the group (now the last in the group after being reversed)
+            let last_node_of_reversed_group = group_node_prev.borrow_mut().next.clone();
+            // set the `next` pointer of this node to the first of the next group
+            last_node_of_reversed_group
+                .clone()
+                .unwrap()
+                .borrow_mut()
+                .next = curr.clone();
+            // set group_prev.next to the last node of the current group
+            group_node_prev.borrow_mut().next = prev.clone();
+            // set group_prev to the last node in the group??
+            group_prev = last_node_of_reversed_group.clone();
 
-            // set the first node in the group `group_node_prev.next` to point to `group_next`
-            let tmp = group_node_prev.borrow_mut().next.clone(); 
-            // set group prev to Kth
-            group_node_prev.borrow_mut().next = kth;
-            group_prev = tmp;
         }
         self.head = dummy.borrow_mut().next.clone();
     }
@@ -200,13 +206,12 @@ mod tests {
         ll.append(2);
         ll.append(3);
 
-        ll.reverse_nodes(3);
+        ll.reverse_nodes();
         assert_eq!(ll.as_list(), [3, 2, 1]);
     }
 
     #[test]
     fn test_linked_list_reverse_nodes_in_k_group() {
-        // TODO: Not passing
         let mut ll = LinkedList::new();
         ll.append(1);
         ll.append(2);
@@ -216,5 +221,44 @@ mod tests {
 
         ll.reverse_nodes_in_k_group(2);
         assert_eq!(ll.as_list(), [2, 1, 4, 3, 5]);
+    }
+
+    #[test]
+    fn test_linked_list_reverse_nodes_in_k_group_k_is_one() {
+        let mut ll = LinkedList::new();
+        ll.append(1);
+        ll.append(2);
+        ll.append(3);
+        ll.append(4);
+        ll.append(5);
+
+        ll.reverse_nodes_in_k_group(1);
+        assert_eq!(ll.as_list(), [1, 2, 3, 4, 5]);
+    }
+
+    #[test]
+    fn test_linked_list_reverse_nodes_in_k_group_k_is_size_of_list() {
+        let mut ll = LinkedList::new();
+        ll.append(1);
+        ll.append(2);
+        ll.append(3);
+        ll.append(4);
+        ll.append(5);
+
+        ll.reverse_nodes_in_k_group(5);
+        assert_eq!(ll.as_list(), [5, 4, 3, 2, 1]);
+    }
+
+    #[test]
+    fn test_linked_list_reverse_nodes_in_k_group_k_is_bigger_than_list() {
+        let mut ll = LinkedList::new();
+        ll.append(1);
+        ll.append(2);
+        ll.append(3);
+        ll.append(4);
+        ll.append(5);
+
+        ll.reverse_nodes_in_k_group(6);
+        assert_eq!(ll.as_list(), [5, 4, 3, 2, 1]);
     }
 }
