@@ -6,35 +6,3 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-
-[[bin]]
-name = "main"
-path = "src/main.rs"
-
-[[bin]]
-name = "linked_list_cycle"
-
-[[bin]]
-name = "remove_adj_dups_str"
-path = "src/bin/remove_adj_dups_str.rs"
-
-[[bin]]
-name = "basic_calculator"
-
-[[bin]]
-name = "palindrome_permutation"
-
-[[bin]]
-name = "valid_anagram"
-
-[[bin]]
-name = "binary_search"
-
-[[bin]]
-name = "rotated_sorted_array"
-
-[[bin]]
-name = "vec_linked_list"
-
-# [[bin]]
-# name = "number_of_islands"

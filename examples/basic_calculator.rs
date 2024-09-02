@@ -73,6 +73,7 @@ mod test {
 
    #[test]
    fn works_on_basic_expression() {
+      // TODO: Does not pass
       let expr = "12 - (6 + 2) + 5";
       let actual = solution(expr);
       assert_eq!(actual, 9);
@@ -80,6 +81,7 @@ mod test {
 
    #[test]
    fn case_two() {
+      // TODO: Does not pass
       let expr = "(8 + 100) + (13 - 8 - (2 + 1))";
       let actual = solution(expr);
       assert_eq!(actual, 110);

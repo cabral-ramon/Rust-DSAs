@@ -1,5 +1,5 @@
 extern crate rust_dsa;
-use std::{cell::RefCell};
+use std::cell::RefCell;
 use std::rc::Rc;
 
 use rust_dsa::linked_list::{LinkedList, Node};
@@ -20,6 +20,6 @@ fn main() {
 }
 
 
-fn detect_linked_list_cycle<T>(list: LinkedList<T>) -> bool {
+fn detect_linked_list_cycle<T>(_: LinkedList<T>) -> bool {
     unimplemented!()
 }
