@@ -85,7 +85,7 @@ fn test_reverse_list() {
     println!("{:?}", memory);
 }
 
-fn reverse_list_at_idx(root: usize, memory: &mut Memory, left: usize, right: usize) -> usize {
+fn reverse_list_at_idx(root: usize, memory: &mut Memory, left: usize, _right: usize) -> usize {
     let mut curr_idx = root;
     for _ in 0..left {
         let maybe_next = memory[curr_idx].next;
